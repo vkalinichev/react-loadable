@@ -1166,21 +1166,14 @@ export default class App extends React.Component {
 }
 ```
 
-Unfortunately at the moment using wrapped Loadable breaks [react-loadable/babel](#babel-plugin) so in such case you have to add required properties (`modules`, `webpack`) manually.
+To use your own wrapped Loadable and make `react-loadable/babel` work,
+use `loadableModules`-option in Babel config: 
 
-```js
-import MyLoadable from './MyLoadable';
-
-const LoadableMyComponent = MyLoadable({
-  loader: () => import('./MyComponent'),
-  modules: ['./MyComponent'],
-  webpack: () => [require.resolveWeak('./MyComponent')],
-});
-
-export default class App extends React.Component {
-  render() {
-    return <LoadableMyComponent/>;
-  }
+```json
+{
+  "plugins": [
+    ["react-loadable/babel", {loadableModules: ['MyLoadableComponent']}] 
+  ]
 }
 ```
 

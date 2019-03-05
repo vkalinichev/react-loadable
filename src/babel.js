@@ -1,9 +1,10 @@
 export default function({ types: t, template }) {
   return {
     visitor: {
-      ImportDeclaration(path) {
+      ImportDeclaration(path, {opts} = {}) {
+        const loadableModules = opts.loadableModules || ['react-loadable'];
         let source = path.node.source.value;
-        if (source !== 'react-loadable') return;
+        if (loadableModules.indexOf(source) === -1) return;
 
         let defaultSpecifier = path.get('specifiers').find(specifier => {
           return specifier.isImportDefaultSpecifier();
