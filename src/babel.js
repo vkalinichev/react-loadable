@@ -2,7 +2,7 @@ export default function({ types: t, template }) {
   return {
     visitor: {
       ImportDeclaration(path, {opts} = {}) {
-        const loadableModules = opts.loadableModules || ['react-loadable'];
+        const loadableModules = opts.loadableModules || ['@vkalinichev/react-loadable'];
         let source = path.node.source.value;
         if (loadableModules.indexOf(source) === -1) return;
 
